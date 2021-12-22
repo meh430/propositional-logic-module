@@ -15,6 +15,8 @@ const tests: TestSuite = {
   "Not returns the correct formula": () => {
     const p = new Literal("p");
     assert.equal(new Not(p).getFormula(), "(¬p)");
+
+    assert.deepEqual(new Not(p).getSymbols(), new Set<string>(["p"]));
   },
 };
 

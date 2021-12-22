@@ -1,6 +1,10 @@
 import { Formula, Valuation } from "./language/Formula";
 
 export function generateValuations(symbols: Set<string>): Valuation[] {
+  if (symbols.size == 0) {
+    return [];
+  }
+
   const syms = [...symbols];
   const valuations: Valuation[] = [];
 

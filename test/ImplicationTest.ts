@@ -26,6 +26,11 @@ const tests: TestSuite = {
     assert.equal(new Implication(p, p).getFormula(), "(p → p)");
     assert.equal(new Implication(new Not(p), q).getFormula(), "((¬p) → q)");
     assert.equal(new Implication(p, new Not(q)).getFormula(), "(p → (¬q))");
+
+    assert.deepEqual(
+      getImplication().getSymbols(),
+      new Set<string>(["p", "q"])
+    );
   },
 };
 

@@ -41,6 +41,8 @@ const tests: TestSuite = {
 
     const f4 = new And(p, q, new Not(r), r, q, p);
     assert.equal(f4.getFormula(), "(p ∧ q ∧ (¬r) ∧ r ∧ q ∧ p)");
+
+    assert.deepEqual(f4.getSymbols(), new Set<string>(["p", "q", "r"]));
   },
 };
 

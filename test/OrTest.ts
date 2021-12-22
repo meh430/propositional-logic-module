@@ -35,6 +35,11 @@ const tests: TestSuite = {
       new Or(p, q, r, r, p, q).getFormula(),
       "(p ∨ q ∨ r ∨ r ∨ p ∨ q)"
     );
+
+    assert.deepEqual(
+      new Or(p, q, r, r, p, q).getSymbols(),
+      new Set<string>(["p", "q", "r"])
+    );
   },
 };
 

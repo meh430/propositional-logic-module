@@ -22,6 +22,11 @@ const tests: TestSuite = {
     assert.equal(new Biconditional(p, q).getFormula(), "(p ↔ q)");
     assert.equal(new Biconditional(p, p).getFormula(), "(p ↔ p)");
     assert.equal(new Biconditional(new Not(q), p).getFormula(), "((¬q) ↔ p)");
+
+    assert.deepEqual(
+      getBiconditional().getSymbols(),
+      new Set<string>(["p", "q"])
+    );
   },
 };
 
