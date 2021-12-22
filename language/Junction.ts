@@ -4,6 +4,10 @@ export abstract class Junction implements Formula {
   protected juncts: Array<Formula>;
 
   constructor(juncts: Array<Formula>) {
+    if (juncts.length < 2) {
+      throw new Error("Incorrect number of operands");
+    }
+
     this.juncts = juncts;
   }
 
