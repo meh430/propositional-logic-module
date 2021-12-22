@@ -1,4 +1,4 @@
-import { Valuation } from "./language/Formula";
+import { Formula, Valuation } from "./language/Formula";
 
 export function generateValuations(symbols: Set<string>): Valuation[] {
   const syms = [...symbols];
@@ -26,4 +26,16 @@ export function generateValuations(symbols: Set<string>): Valuation[] {
   generateBinaryStrings(syms.length, new Array<number>(syms.length).fill(0), 0);
 
   return valuations;
+}
+
+export function collectSymbols(formulas: Formula[]): Set<string> {
+  const symbols: Set<string> = new Set();
+
+  formulas.forEach((f) => {
+    f.getSymbols().forEach((s) => {
+      symbols.add(s);
+    });
+  });
+
+  return symbols;
 }
