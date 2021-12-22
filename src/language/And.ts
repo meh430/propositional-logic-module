@@ -7,8 +7,8 @@ export class And extends Junction {
   }
 
   evaluate(valuation: Valuation): boolean {
-    return !this.juncts.some((conjunct: Formula) =>
-      !conjunct.evaluate(valuation)
+    return !this.juncts.some(
+      (conjunct: Formula) => !conjunct.evaluate(valuation)
     );
   }
 

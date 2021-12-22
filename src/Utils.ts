@@ -2,12 +2,16 @@ import { Valuation } from "./language/Formula";
 
 export function generateValuations(symbols: Set<string>): Valuation[] {
   const syms = [...symbols];
-  const valuations: Valuation[] = []
+  const valuations: Valuation[] = [];
 
-  function generateBinaryStrings(bits: number, binary: number[], index: number) {
+  function generateBinaryStrings(
+    bits: number,
+    binary: number[],
+    index: number
+  ) {
     if (index == bits) {
       const valuation: Valuation = {};
-      binary.forEach((b, i) => valuation[syms[i]] = Boolean(b));
+      binary.forEach((b, i) => (valuation[syms[i]] = Boolean(b)));
       valuations.push(valuation);
       return;
     }
@@ -23,4 +27,3 @@ export function generateValuations(symbols: Set<string>): Valuation[] {
 
   return valuations;
 }
-
