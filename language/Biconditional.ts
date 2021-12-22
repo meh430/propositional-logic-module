@@ -1,4 +1,4 @@
-import { Formula } from "./Formula";
+import { Formula, Valuation } from "./Formula";
 
 export class Biconditional implements Formula {
   operand1: Formula;
@@ -13,7 +13,7 @@ export class Biconditional implements Formula {
     return new Set<string>([...this.operand1.getSymbols(), ...this.operand2.getSymbols()]);
   }
 
-  evaluate(valuation: Map<string, boolean>): boolean {
+  evaluate(valuation: Valuation): boolean {
     const operand1Val = this.operand1.evaluate(valuation);
     const operand2Val = this.operand2.evaluate(valuation);
 

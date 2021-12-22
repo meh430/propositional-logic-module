@@ -1,12 +1,12 @@
-import { Formula } from "./Formula";
+import { Formula, Valuation } from "./Formula";
 import { Junction } from "./Junction";
 
-class Or extends Junction {
+export class Or extends Junction {
   constructor(disjuncts: Array<Formula>) {
     super(disjuncts);
   }
 
-  evaluate(valuation: Map<string, boolean>): boolean {
+  evaluate(valuation: Valuation): boolean {
     return this.juncts.some((disjunct: Formula) =>
       disjunct.evaluate(valuation)
     );

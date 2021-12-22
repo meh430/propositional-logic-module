@@ -1,6 +1,6 @@
-import { Formula } from "./Formula";
+import { Formula, Valuation } from "./Formula";
 
-class Not implements Formula {
+export class Not implements Formula {
   private operand: Formula;
 
   constructor(operand: Formula) {
@@ -11,7 +11,7 @@ class Not implements Formula {
     return this.operand.getSymbols();
   }
 
-  evaluate(valuation: Map<string, boolean>): boolean {
+  evaluate(valuation: Valuation): boolean {
     return !this.operand.evaluate(valuation);
   }
 

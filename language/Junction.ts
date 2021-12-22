@@ -1,4 +1,4 @@
-import { Formula } from "./Formula";
+import { Formula, Valuation } from "./Formula";
 
 export abstract class Junction implements Formula {
   protected juncts: Array<Formula>;
@@ -7,7 +7,7 @@ export abstract class Junction implements Formula {
     this.juncts = juncts;
   }
 
-  abstract evaluate(valuation: Map<string, boolean>): boolean;
+  abstract evaluate(valuation: Valuation): boolean;
   abstract getFormula(): string;
 
   getSymbols(): Set<string> {

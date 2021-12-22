@@ -1,4 +1,4 @@
-import { Formula } from "./Formula";
+import { Formula, Valuation } from "./Formula";
 import { Junction } from "./Junction";
 
 export class And extends Junction {
@@ -6,7 +6,7 @@ export class And extends Junction {
     super(conjucts);
   }
 
-  evaluate(valuation: Map<string, boolean>): boolean {
+  evaluate(valuation: Valuation): boolean {
     return this.juncts.every((conjunct: Formula) =>
       conjunct.evaluate(valuation)
     );

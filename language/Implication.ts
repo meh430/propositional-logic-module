@@ -1,4 +1,4 @@
-import { Formula } from "./Formula";
+import { Formula, Valuation } from "./Formula";
 
 export class Implication implements Formula {
   antecedent: Formula;
@@ -13,7 +13,7 @@ export class Implication implements Formula {
     return new Set<string>([...this.antecedent.getSymbols(), ...this.consequent.getSymbols()]);
   }
 
-  evaluate(valuation: Map<string, boolean>): boolean {
+  evaluate(valuation: Valuation): boolean {
     const antecedentVal = this.antecedent.evaluate(valuation);
     const consequentVal = this.consequent.evaluate(valuation);
 

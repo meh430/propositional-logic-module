@@ -1,6 +1,6 @@
-import { Formula } from "./Formula";
+import { Formula, Valuation } from "./Formula";
 
-class Literal implements Formula {
+export class Literal implements Formula {
   private symbol: string;
 
   constructor(symbol: string) {
@@ -11,8 +11,8 @@ class Literal implements Formula {
     return new Set<string>([this.symbol]);
   }
 
-  evaluate(valuation: Map<String, boolean>): boolean {
-    return Boolean(valuation.get(this.symbol));
+  evaluate(valuation: Valuation): boolean {
+    return Boolean(valuation[this.symbol]);
   }
 
   getFormula(): string {
