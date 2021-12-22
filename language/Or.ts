@@ -7,7 +7,7 @@ class Or extends Junction {
   }
 
   evaluate(valuation: Map<string, boolean>): boolean {
-    return this.juncts.every((disjunct: Formula) =>
+    return this.juncts.some((disjunct: Formula) =>
       disjunct.evaluate(valuation)
     );
   }
