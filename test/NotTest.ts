@@ -12,6 +12,10 @@ const tests: TestSuite = {
     const not = new Not(new Literal("p"));
     assert.equal(not.evaluate({ p: false }), true);
   },
+  "Not returns the correct formula": () => {
+    const p = new Literal("p");
+    assert.equal(new Not(p).getFormula(), "(¬p)");
+  },
 };
 
 module.exports = tests;
