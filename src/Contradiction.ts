@@ -1,8 +1,8 @@
 import { Formula } from "./language/Formula";
-import { generateValuations } from "./Utils";
+import { Not } from "./language/Not";
+import { isTautology } from "./Tautology";
 
 export function isContradiction(formula: Formula): boolean {
-  const symbols = formula.getSymbols();
-  const valuations = generateValuations(symbols);
-  return !valuations.some((v) => formula.evaluate(v));
+  // the negation of a contradiction will be a tuatology
+  return isTautology(new Not(formula));
 }

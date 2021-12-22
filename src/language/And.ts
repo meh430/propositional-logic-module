@@ -7,6 +7,8 @@ export class And extends Junction {
   }
 
   evaluate(valuation: Valuation): boolean {
+    // if even one conjunct is false, And evaluates to false
+    // this emulates short circuiting
     return !this.juncts.some(
       (conjunct: Formula) => !conjunct.evaluate(valuation)
     );

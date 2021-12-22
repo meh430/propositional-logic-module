@@ -17,8 +17,8 @@ export abstract class Junction implements Formula {
   getSymbols(): Set<string> {
     const symbols = new Set<string>();
 
-    this.juncts.forEach((conjunct: Formula) => {
-      conjunct.getSymbols().forEach((symbol: string) => symbols.add(symbol));
+    this.juncts.forEach((junct: Formula) => {
+      junct.getSymbols().forEach((symbol: string) => symbols.add(symbol));
     });
 
     return symbols;
@@ -31,7 +31,7 @@ export abstract class Junction implements Formula {
     this.juncts.forEach((conjunct: Formula, index: number) => {
       formula += conjunct.getFormula();
       if (index != len - 1) {
-        formula += " ∧ ";
+        formula += connective;
       }
     });
 
