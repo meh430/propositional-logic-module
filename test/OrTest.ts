@@ -1,6 +1,6 @@
 import * as assert from "assert";
-import { Or } from "../language/Or";
-import { Literal } from "../language/Literal";
+import { Or } from "../src/language/Or";
+import { Literal } from "../src/language/Literal";
 import { TestSuite } from "./test";
 
 function getLiterals(): Literal[] {

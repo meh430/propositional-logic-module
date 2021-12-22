@@ -8,7 +8,7 @@
     "outDir": "dist",
     "strict": true
   },
-  "include": ["language/**/*"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"],
   "lib": ["es2015"]
 }
