@@ -16,5 +16,5 @@ fs.readdirSync(__dirname).forEach((file) => {
     for (const t in test) {
       it(t, test[t]);
     }
-  })
+  });
 });

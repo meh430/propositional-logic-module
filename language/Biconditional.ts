@@ -10,7 +10,10 @@ export class Biconditional implements Formula {
   }
 
   getSymbols(): Set<string> {
-    return new Set<string>([...this.operand1.getSymbols(), ...this.operand2.getSymbols()]);
+    return new Set<string>([
+      ...this.operand1.getSymbols(),
+      ...this.operand2.getSymbols(),
+    ]);
   }
 
   evaluate(valuation: Valuation): boolean {
@@ -21,6 +24,6 @@ export class Biconditional implements Formula {
   }
 
   getFormula(): string {
-    return `(${this.operand1.getFormula()} ↔ ${this.operand2.getFormula()})`; 
+    return `(${this.operand1.getFormula()} ↔ ${this.operand2.getFormula()})`;
   }
 }

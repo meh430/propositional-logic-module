@@ -16,7 +16,7 @@ const tests: TestSuite = {
   "Implication evaluates to 0 when antecedent is 1 and consequent is 0": () => {
     const implication = getImplication();
     assert.equal(implication.evaluate({ p: true, q: false }), false);
-  }
+  },
 };
 
 module.exports = tests;

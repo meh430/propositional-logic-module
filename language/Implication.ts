@@ -10,17 +10,20 @@ export class Implication implements Formula {
   }
 
   getSymbols(): Set<string> {
-    return new Set<string>([...this.antecedent.getSymbols(), ...this.consequent.getSymbols()]);
+    return new Set<string>([
+      ...this.antecedent.getSymbols(),
+      ...this.consequent.getSymbols(),
+    ]);
   }
 
   evaluate(valuation: Valuation): boolean {
     const antecedentVal = this.antecedent.evaluate(valuation);
     const consequentVal = this.consequent.evaluate(valuation);
 
-    return (!antecedentVal || consequentVal);
+    return !antecedentVal || consequentVal;
   }
 
   getFormula(): string {
-    return `(${this.antecedent.getFormula()} → ${this.consequent.getFormula()})`; 
+    return `(${this.antecedent.getFormula()} → ${this.consequent.getFormula()})`;
   }
 }

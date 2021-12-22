@@ -10,11 +10,11 @@ function getBiconditional(): Biconditional {
 const tests: TestSuite = {
   "Biconditional matches truth table": () => {
     const biconditional = getBiconditional();
-    assert.equal(biconditional.evaluate({p: false, q: false}), true);
-    assert.equal(biconditional.evaluate({p: true, q: false}), false);
-    assert.equal(biconditional.evaluate({p: false, q: true}), false);
-    assert.equal(biconditional.evaluate({p: true, q: true}), true);
-  }
+    assert.equal(biconditional.evaluate({ p: false, q: false }), true);
+    assert.equal(biconditional.evaluate({ p: true, q: false }), false);
+    assert.equal(biconditional.evaluate({ p: false, q: true }), false);
+    assert.equal(biconditional.evaluate({ p: true, q: true }), true);
+  },
 };
 
 module.exports = tests;
