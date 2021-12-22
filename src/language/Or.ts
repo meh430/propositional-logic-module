@@ -2,8 +2,8 @@ import { Formula, Valuation } from "./Formula";
 import { Junction } from "./Junction";
 
 export class Or extends Junction {
-  constructor(disjuncts: Array<Formula>) {
-    super(disjuncts);
+  constructor(...disjuncts: Formula[]) {
+    super(...disjuncts);
   }
 
   evaluate(valuation: Valuation): boolean {

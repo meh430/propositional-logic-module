@@ -9,16 +9,16 @@ function getLiterals(): Literal[] {
 
 const tests: TestSuite = {
   "And evaluates to 0 when both operands are 0": () => {
-    const and = new And(getLiterals());
+    const and = new And(...getLiterals());
     assert.equal(and.evaluate({ p: false, q: false }), false);
   },
   "And evaluates to 0 when one operand is 0": () => {
-    const and = new And(getLiterals());
+    const and = new And(...getLiterals());
     assert.equal(and.evaluate({ p: true, q: false }), false);
     assert.equal(and.evaluate({ p: false, q: true }), false);
   },
   "And evaluates to 1 when both operands are 1": () => {
-    const and = new And(getLiterals());
+    const and = new And(...getLiterals());
     assert.equal(and.evaluate({ p: true, q: true }), true);
   },
 };
