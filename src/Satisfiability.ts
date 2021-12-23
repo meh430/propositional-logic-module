@@ -25,11 +25,6 @@ export function getTautologicalConsequenceCounter(
   premises: Formula[],
   conclusion: Formula
 ): Valuation | undefined {
-  // empty set implies everything
-  if (premises.length == 0) {
-    return undefined;
-  }
-
   const symbols: Set<string> = collectSymbols([...premises, conclusion]);
   const valuations = generateValuations(symbols);
 
@@ -46,7 +41,8 @@ export function getTautologicalConsequenceCounter(
   // for every valuation where the premises are true, if the conclusion is false, that is the counter
   for (let i = 0; i < valuations.length; i++) {
     const v = valuations[i];
-    const premisesSatisfied = premises.every((p) => p.evaluate(v));
+    const premisesSatisfied =
+      premises.length > 0 ? premises.every((p) => p.evaluate(v)) : true;
     const conclusionSatisfied = conclusion.evaluate(v);
     if (premisesSatisfied && !conclusionSatisfied) {
       return v;
