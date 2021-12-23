@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Junction = void 0;
 class Junction {
-    constructor(juncts) {
+    constructor(...juncts) {
         if (juncts.length < 2) {
             throw new Error("Incorrect number of operands");
         }
@@ -10,8 +10,8 @@ class Junction {
     }
     getSymbols() {
         const symbols = new Set();
-        this.juncts.forEach((conjunct) => {
-            conjunct.getSymbols().forEach((symbol) => symbols.add(symbol));
+        this.juncts.forEach((junct) => {
+            junct.getSymbols().forEach((symbol) => symbols.add(symbol));
         });
         return symbols;
     }
@@ -21,7 +21,7 @@ class Junction {
         this.juncts.forEach((conjunct, index) => {
             formula += conjunct.getFormula();
             if (index != len - 1) {
-                formula += " ∧ ";
+                formula += connective;
             }
         });
         return formula + ")";

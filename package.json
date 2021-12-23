@@ -2,9 +2,10 @@
   "name": "logic",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/app.js",
+  "main": "dist/logic.js",
+  "types": "dist/logic.d.ts",
   "scripts": {
-    "start": "tsc && node dist/app.js",
+    "start": "tsc && node dist/logic.js",
     "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'test/**/*.ts'"
   },
   "keywords": [],
