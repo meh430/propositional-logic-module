@@ -1,7 +1,6 @@
 import * as assert from "assert";
 import { Biconditional } from "../src/language/Biconditional";
-import { Literal } from "../src/language/Literal";
-import { Not } from "../src/language/Not";
+import { Not, Literal } from "../src/language/Not";
 import { TestSuite } from "./test";
 
 function getBiconditional(): Biconditional {

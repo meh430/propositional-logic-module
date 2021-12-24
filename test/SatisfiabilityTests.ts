@@ -1,10 +1,8 @@
 import * as assert from "assert";
-import { Formula, Valuation } from "../src/language/Formula";
-import { Literal } from "../src/language/Literal";
-import { And } from "../src/language/And";
-import { Or } from "../src/language/Or";
+import { Formula } from "../src/language/Formula";
+import { And, Or } from "../src/language/Junction";
 import { Implication } from "../src/language/Implication";
-import { Not } from "../src/language/Not";
+import { Not, Literal } from "../src/language/Not";
 import {
   isSatisfiableFormula,
   isSatisfiableSet,

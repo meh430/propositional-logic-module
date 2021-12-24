@@ -20,6 +20,9 @@ class Implication {
     getFormula() {
         return `(${this.antecedent.getFormula()} → ${this.consequent.getFormula()})`;
     }
+    getDual() {
+        throw new Error("Formula not in DNF");
+    }
 }
 exports.Implication = Implication;
 //# sourceMappingURL=Implication.js.map

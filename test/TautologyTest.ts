@@ -1,9 +1,7 @@
 import * as assert from "assert";
 import { isTautology } from "../src/Tautology";
-import { Literal } from "../src/language/Literal";
-import { Or } from "../src/language/Or";
-import { And } from "../src/language/And";
-import { Not } from "../src/language/Not";
+import { And, Or } from "../src/language/Junction";
+import { Not, Literal } from "../src/language/Not";
 import { Implication } from "../src/language/Implication";
 import { TestSuite } from "./test";
 

@@ -5,4 +5,5 @@ export declare class Literal implements Formula {
     getSymbols(): Set<string>;
     evaluate(valuation: Valuation): boolean;
     getFormula(): string;
+    getCNF(): Formula;
 }

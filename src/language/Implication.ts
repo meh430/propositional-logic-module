@@ -1,8 +1,8 @@
 import { Formula, Valuation } from "./Formula";
 
 export class Implication implements Formula {
-  antecedent: Formula;
-  consequent: Formula;
+  private antecedent: Formula;
+  private consequent: Formula;
 
   constructor(antecedent: Formula, consequent: Formula) {
     this.antecedent = antecedent;
@@ -25,5 +25,9 @@ export class Implication implements Formula {
 
   getFormula(): string {
     return `(${this.antecedent.getFormula()} → ${this.consequent.getFormula()})`;
+  }
+
+  getDual(): Formula {
+    throw new Error("Formula not in DNF");
   }
 }

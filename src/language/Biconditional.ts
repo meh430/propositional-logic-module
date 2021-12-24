@@ -1,8 +1,8 @@
 import { Formula, Valuation } from "./Formula";
 
 export class Biconditional implements Formula {
-  operand1: Formula;
-  operand2: Formula;
+  private operand1: Formula;
+  private operand2: Formula;
 
   constructor(operand1: Formula, operand2: Formula) {
     this.operand1 = operand1;
@@ -25,5 +25,9 @@ export class Biconditional implements Formula {
 
   getFormula(): string {
     return `(${this.operand1.getFormula()} ↔ ${this.operand2.getFormula()})`;
+  }
+
+  getDual(): Formula {
+    throw new Error("Formula not in DNF");
   }
 }

@@ -20,6 +20,9 @@ class Biconditional {
     getFormula() {
         return `(${this.operand1.getFormula()} ↔ ${this.operand2.getFormula()})`;
     }
+    getDual() {
+        throw new Error("Formula not in DNF");
+    }
 }
 exports.Biconditional = Biconditional;
 //# sourceMappingURL=Biconditional.js.map

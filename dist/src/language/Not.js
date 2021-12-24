@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Not = void 0;
+exports.Literal = exports.Not = void 0;
 class Not {
     constructor(operand) {
         this.operand = operand;
@@ -14,6 +14,30 @@ class Not {
     getFormula() {
         return `(¬${this.operand.getFormula()})`;
     }
+    getDual() {
+        if (this.operand instanceof Literal) {
+            return this.operand;
+        }
+        throw new Error("Formula not in DNF");
+    }
 }
 exports.Not = Not;
+class Literal {
+    constructor(symbol) {
+        this.symbol = symbol;
+    }
+    getSymbols() {
+        return new Set([this.symbol]);
+    }
+    evaluate(valuation) {
+        return Boolean(valuation[this.symbol]);
+    }
+    getFormula() {
+        return this.symbol;
+    }
+    getDual() {
+        return new Not(this);
+    }
+}
+exports.Literal = Literal;
 //# sourceMappingURL=Not.js.map

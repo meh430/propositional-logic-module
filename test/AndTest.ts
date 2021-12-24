@@ -1,7 +1,6 @@
 import * as assert from "assert";
-import { And } from "../src/language/And";
-import { Not } from "../src/language/Not";
-import { Literal } from "../src/language/Literal";
+import { And } from "../src/language/Junction";
+import { Not, Literal } from "../src/language/Not";
 import { TestSuite } from "./test";
 
 function getLiterals(): Literal[] {

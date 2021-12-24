@@ -19,3 +19,9 @@ export function convertToDNF(formula: Formula): Formula {
     });
   return new Or(...disjuncts);
 }
+
+export function convertToCNF(formula: Formula): Formula {
+  const negated = new Not(formula);
+  const dnf = convertToDNF(negated);
+  return dnf.getDual();
+}

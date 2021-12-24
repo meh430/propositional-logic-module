@@ -1,6 +1,5 @@
 import * as assert from "assert";
-import { Not } from "../src/language/Not";
-import { Literal } from "../src/language/Literal";
+import { Not, Literal } from "../src/language/Not";
 import { TestSuite } from "./test";
 
 const tests: TestSuite = {

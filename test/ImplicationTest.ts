@@ -1,7 +1,6 @@
 import * as assert from "assert";
 import { Implication } from "../src/language/Implication";
-import { Not } from "../src/language/Not";
-import { Literal } from "../src/language/Literal";
+import { Not, Literal } from "../src/language/Not";
 import { TestSuite } from "./test";
 
 function getImplication(): Implication {
