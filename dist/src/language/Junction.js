@@ -16,6 +16,9 @@ class Junction {
         });
         return symbols;
     }
+    getOperands() {
+        return [...this.juncts];
+    }
     getJunctFormula(connective) {
         let formula = "(";
         const len = this.juncts.length;

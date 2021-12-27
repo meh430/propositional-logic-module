@@ -26,6 +26,10 @@ export class Not implements Formula {
 
     throw new Error("Formula not in DNF");
   }
+
+  isLogicalLiteral(): boolean {
+    return this.operand instanceof Literal;
+  }
 }
 
 export class Literal implements Formula {

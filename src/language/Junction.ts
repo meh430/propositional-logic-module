@@ -26,6 +26,10 @@ export abstract class Junction implements Formula {
     return symbols;
   }
 
+  getOperands(): Formula[] {
+    return [...this.juncts];
+  }
+
   protected getJunctFormula(connective: string): string {
     let formula = "(";
 

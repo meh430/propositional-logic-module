@@ -20,6 +20,9 @@ class Not {
         }
         throw new Error("Formula not in DNF");
     }
+    isLogicalLiteral() {
+        return this.operand instanceof Literal;
+    }
 }
 exports.Not = Not;
 class Literal {

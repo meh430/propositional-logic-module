@@ -6,6 +6,7 @@ export declare class Not implements Formula {
     evaluate(valuation: Valuation): boolean;
     getFormula(): string;
     getDual(): Formula;
+    isLogicalLiteral(): boolean;
 }
 export declare class Literal implements Formula {
     private symbol;

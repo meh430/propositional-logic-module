@@ -6,6 +6,7 @@ export declare abstract class Junction implements Formula {
     abstract evaluate(valuation: Valuation): boolean;
     abstract getFormula(): string;
     getSymbols(): Set<string>;
+    getOperands(): Formula[];
     protected getJunctFormula(connective: string): string;
 }
 export declare class And extends Junction {
