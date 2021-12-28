@@ -1,7 +1,7 @@
 import * as assert from "assert";
 import { And, Or } from "../src/language/Junction";
 import { Implication } from "../src/language/Implication";
-import { Not, Literal } from "../src/language/Not";
+import { Not, Symbol } from "../src/language/Literal";
 import { collectSymbols, generateValuations } from "../src/Utils";
 import { TestSuite } from "./test";
 
@@ -13,9 +13,9 @@ const tests: TestSuite = {
   "collectSymbols test": () => {
     assert.deepEqual(collectSymbols([]), s());
 
-    const p = new Literal("p");
-    const q = new Literal("q");
-    const r = new Literal("r");
+    const p = new Symbol("p");
+    const q = new Symbol("q");
+    const r = new Symbol("r");
 
     assert.deepEqual(collectSymbols([p]), s("p"));
     assert.deepEqual(collectSymbols([p, q, r]), s("p", "q", "r"));

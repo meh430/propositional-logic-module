@@ -1,10 +1,10 @@
 import * as assert from "assert";
 import { Implication } from "../src/language/Implication";
-import { Not, Literal } from "../src/language/Not";
+import { Not, Symbol } from "../src/language/Literal";
 import { TestSuite } from "./test";
 
 function getImplication(): Implication {
-  return new Implication(new Literal("p"), new Literal("q"));
+  return new Implication(new Symbol("p"), new Symbol("q"));
 }
 
 const tests: TestSuite = {
@@ -18,8 +18,8 @@ const tests: TestSuite = {
     assert.equal(implication.evaluate({ p: true, q: false }), false);
   },
   "Implication returns the correct formula": () => {
-    const p = new Literal("p");
-    const q = new Literal("q");
+    const p = new Symbol("p");
+    const q = new Symbol("q");
 
     assert.equal(new Implication(p, q).getFormula(), "(p → q)");
     assert.equal(new Implication(p, p).getFormula(), "(p → p)");

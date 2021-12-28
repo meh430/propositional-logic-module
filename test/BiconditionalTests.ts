@@ -1,10 +1,10 @@
 import * as assert from "assert";
 import { Biconditional } from "../src/language/Biconditional";
-import { Not, Literal } from "../src/language/Not";
+import { Not, Symbol } from "../src/language/Literal";
 import { TestSuite } from "./test";
 
 function getBiconditional(): Biconditional {
-  return new Biconditional(new Literal("p"), new Literal("q"));
+  return new Biconditional(new Symbol("p"), new Symbol("q"));
 }
 
 const tests: TestSuite = {
@@ -16,8 +16,8 @@ const tests: TestSuite = {
     assert.equal(biconditional.evaluate({ p: true, q: true }), true);
   },
   "Biconditional returns the correct formula": () => {
-    const p = new Literal("p");
-    const q = new Literal("q");
+    const p = new Symbol("p");
+    const q = new Symbol("q");
     assert.equal(new Biconditional(p, q).getFormula(), "(p ↔ q)");
     assert.equal(new Biconditional(p, p).getFormula(), "(p ↔ p)");
     assert.equal(new Biconditional(new Not(q), p).getFormula(), "((¬q) ↔ p)");

@@ -1,10 +1,10 @@
 import * as assert from "assert";
 import { And } from "../src/language/Junction";
-import { Not, Literal } from "../src/language/Not";
+import { Not, Symbol } from "../src/language/Literal";
 import { TestSuite } from "./test";
 
-function getLiterals(): Literal[] {
-  return [new Literal("p"), new Literal("q")];
+function getLiterals(): Symbol[] {
+  return [new Symbol("p"), new Symbol("q")];
 }
 
 const tests: TestSuite = {
@@ -22,9 +22,9 @@ const tests: TestSuite = {
     assert.equal(and.evaluate({ p: true, q: true }), true);
   },
   "And returns the correct formula": () => {
-    const p = new Literal("p");
-    const q = new Literal("q");
-    const r = new Literal("r");
+    const p = new Symbol("p");
+    const q = new Symbol("q");
+    const r = new Symbol("r");
 
     // p and p
     const f1 = new And(p, p);

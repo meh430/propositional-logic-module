@@ -2,14 +2,14 @@ import * as assert from "assert";
 import { Formula } from "../src/language/Formula";
 import { And, Or } from "../src/language/Junction";
 import { Implication } from "../src/language/Implication";
-import { Not, Literal } from "../src/language/Not";
+import { Not, Symbol } from "../src/language/Literal";
 import { convertToDNF, convertToCNF } from "../src/Convert";
 import { TestSuite } from "./test";
 import { Biconditional } from "../logic";
 
-const p = new Literal("p");
-const q = new Literal("q");
-const r = new Literal("r");
+const p = new Symbol("p");
+const q = new Symbol("q");
+const r = new Symbol("r");
 
 const formulas: { [key: string]: Formula[] } = {
   literal1: [p, p, p],

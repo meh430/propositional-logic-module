@@ -2,7 +2,7 @@ import * as assert from "assert";
 import { Formula } from "../src/language/Formula";
 import { And, Or } from "../src/language/Junction";
 import { Implication } from "../src/language/Implication";
-import { Not, Literal } from "../src/language/Not";
+import { Not, Symbol } from "../src/language/Literal";
 import {
   isSatisfiableFormula,
   isSatisfiableSet,
@@ -10,9 +10,9 @@ import {
 } from "../src/Satisfiability";
 import { TestSuite } from "./test";
 
-const p = new Literal("p");
-const q = new Literal("q");
-const r = new Literal("r");
+const p = new Symbol("p");
+const q = new Symbol("q");
+const r = new Symbol("r");
 
 const formulas = {
   implication1: new Implication(p, q),
@@ -25,10 +25,10 @@ const formulas = {
 
 const tests: TestSuite = {
   "isSatisfiableFormula test": () => {
-    const p = new Literal("p");
+    const p = new Symbol("p");
     assert.equal(isSatisfiableFormula(p), true);
     assert.equal(
-      isSatisfiableFormula(new Implication(p, new Literal("q"))),
+      isSatisfiableFormula(new Implication(p, new Symbol("q"))),
       true
     );
     assert.equal(isSatisfiableFormula(new And(p, new Not(p))), false);
