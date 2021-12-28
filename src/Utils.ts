@@ -43,3 +43,15 @@ export function collectSymbols(formulas: Formula[]): Set<string> {
 
   return symbols;
 }
+
+export function union<Type>(a: Set<Type>, b: Set<Type>): Set<Type> {
+  return new Set([...a, ...b]);
+}
+
+export function intersection<Type>(a: Set<Type>, b: Set<Type>): Set<Type> {
+  return new Set([...a].filter((e) => b.has(e)));
+}
+
+export function difference<Type>(a: Set<Type>, b: Set<Type>): Set<Type> {
+  return new Set([...a].filter((e) => !b.has(e)));
+}

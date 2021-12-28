@@ -1,4 +1,4 @@
-import { And, Formula, Literal, Not, Or } from "../logic";
+import { And, Formula, Symbol, Not, Or } from "../logic";
 import { Junction } from "./language/Junction";
 import { generateValuations } from "./Utils";
 
@@ -15,9 +15,9 @@ export function convertToDNF(formula: Formula): Formula {
       const literals: Formula[] = [];
       for (const l in v) {
         if (v[l]) {
-          literals.push(new Literal(l));
+          literals.push(new Symbol(l));
         } else {
-          literals.push(new Not(new Literal(l)));
+          literals.push(new Not(new Symbol(l)));
         }
       }
 
@@ -30,7 +30,7 @@ export function convertToDNF(formula: Formula): Formula {
 
   // no disjuncts means no valuations where the formula is 1, so a contradiction
   if (disjuncts.length == 0) {
-    const s = new Literal([...symbols][0]);
+    const s = new Symbol([...symbols][0]);
     return new And(s, new Not(s));
   }
 
@@ -99,7 +99,7 @@ export function isCNF(formula: Formula): boolean {
 
 export function isLogicalLiteral(formula: Formula) {
   return (
-    formula instanceof Literal ||
+    formula instanceof Symbol ||
     (formula instanceof Not && formula.isLogicalLiteral())
   );
 }

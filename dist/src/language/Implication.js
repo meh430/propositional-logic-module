@@ -1,16 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Implication = void 0;
+const Utils_1 = require("../Utils");
 class Implication {
     constructor(antecedent, consequent) {
         this.antecedent = antecedent;
         this.consequent = consequent;
     }
     getSymbols() {
-        return new Set([
-            ...this.antecedent.getSymbols(),
-            ...this.consequent.getSymbols(),
-        ]);
+        return (0, Utils_1.union)(this.antecedent.getSymbols(), this.consequent.getSymbols());
     }
     evaluate(valuation) {
         const antecedentVal = this.antecedent.evaluate(valuation);

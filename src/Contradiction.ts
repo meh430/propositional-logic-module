@@ -1,5 +1,5 @@
 import { Formula } from "./language/Formula";
-import { Not } from "./language/Not";
+import { Not } from "./language/Literal";
 import { isTautology } from "./Tautology";
 
 export function isContradiction(formula: Formula): boolean {

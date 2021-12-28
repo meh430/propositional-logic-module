@@ -1,5 +1,5 @@
 import { Formula, Valuation } from "./Formula";
-import { Literal, Not } from "./Not";
+import { Symbol, Not } from "./Literal";
 
 export abstract class Junction implements Formula {
   protected juncts: Array<Formula>;
@@ -63,7 +63,7 @@ export class And extends Junction {
   }
 
   getDual(): Formula {
-    if (this.juncts.every((j) => j instanceof Literal || j instanceof Not)) {
+    if (this.juncts.every((j) => j instanceof Symbol || j instanceof Not)) {
       return new Or(...this.juncts.map((j) => j.getDual()));
     }
 
@@ -88,7 +88,7 @@ export class Or extends Junction {
 
   getDual(): Formula {
     const inDNF = this.juncts.every(
-      (j) => j instanceof Literal || j instanceof Not || j instanceof And
+      (j) => j instanceof Symbol || j instanceof Not || j instanceof And
     );
 
     if (inDNF) {

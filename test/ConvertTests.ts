@@ -50,7 +50,6 @@ const formulas: { [key: string]: Formula[] } = {
     ),
   ],
 };
-// npnqnr + pnqr + pqr
 
 const tests: TestSuite = {};
 

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.collectSymbols = exports.generateValuations = void 0;
+exports.difference = exports.intersection = exports.union = exports.collectSymbols = exports.generateValuations = void 0;
 function generateValuations(symbols) {
     if (symbols.size == 0) {
         return [];
@@ -33,4 +33,16 @@ function collectSymbols(formulas) {
     return symbols;
 }
 exports.collectSymbols = collectSymbols;
+function union(a, b) {
+    return new Set([...a, ...b]);
+}
+exports.union = union;
+function intersection(a, b) {
+    return new Set([...a].filter((e) => b.has(e)));
+}
+exports.intersection = intersection;
+function difference(a, b) {
+    return new Set([...a].filter((e) => !b.has(e)));
+}
+exports.difference = difference;
 //# sourceMappingURL=Utils.js.map

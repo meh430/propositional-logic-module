@@ -8,7 +8,7 @@ export declare class Not implements Formula {
     getDual(): Formula;
     isLogicalLiteral(): boolean;
 }
-export declare class Literal implements Formula {
+export declare class Symbol implements Formula {
     private symbol;
     constructor(symbol: string);
     getSymbols(): Set<string>;

@@ -45,7 +45,7 @@ class And extends Junction {
         return this.getJunctFormula(" ∧ ");
     }
     getDual() {
-        if (this.juncts.every((j) => j instanceof Not_1.Literal || j instanceof Not_1.Not)) {
+        if (this.juncts.every((j) => j instanceof Not_1.Symbol || j instanceof Not_1.Not)) {
             return new Or(...this.juncts.map((j) => j.getDual()));
         }
         throw new Error("Formula not in DNF");
@@ -63,7 +63,7 @@ class Or extends Junction {
         return this.getJunctFormula(" ∨ ");
     }
     getDual() {
-        const inDNF = this.juncts.every((j) => j instanceof Not_1.Literal || j instanceof Not_1.Not || j instanceof And);
+        const inDNF = this.juncts.every((j) => j instanceof Not_1.Symbol || j instanceof Not_1.Not || j instanceof And);
         if (inDNF) {
             return new And(...this.juncts.map((j) => j.getDual()));
         }

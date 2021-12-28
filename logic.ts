@@ -2,7 +2,7 @@ import { And, Or } from "./src/language/Junction";
 import { Biconditional } from "./src/language/Biconditional";
 import { Formula, Valuation } from "./src/language/Formula";
 import { Implication } from "./src/language/Implication";
-import { Not, Literal } from "./src/language/Not";
+import { Not, Symbol } from "./src/language/Literal";
 import { isContradiction } from "./src/Contradiction";
 import { isTautology } from "./src/Tautology";
 import {
@@ -10,12 +10,19 @@ import {
   isSatisfiableSet,
   getTautologicalConsequenceCounter,
 } from "./src/Satisfiability";
-
+import {
+  convertToDNF,
+  convertToCNF,
+  isDNF,
+  isCNF,
+  isLogicalLiteral,
+} from "./src/Convert";
+import { Row, TruthTable } from "./src/TruthTable";
 export {
   And,
   Biconditional,
   Implication,
-  Literal,
+  Symbol,
   Not,
   Or,
   Formula,
@@ -25,4 +32,11 @@ export {
   isSatisfiableSet,
   isSatisfiableFormula,
   getTautologicalConsequenceCounter,
+  convertToDNF,
+  convertToCNF,
+  isDNF,
+  isCNF,
+  isLogicalLiteral,
+  Row,
+  TruthTable,
 };

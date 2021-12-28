@@ -20,7 +20,7 @@ export class Not implements Formula {
   }
 
   getDual(): Formula {
-    if (this.operand instanceof Literal) {
+    if (this.operand instanceof Symbol) {
       return this.operand;
     }
 
@@ -28,11 +28,11 @@ export class Not implements Formula {
   }
 
   isLogicalLiteral(): boolean {
-    return this.operand instanceof Literal;
+    return this.operand instanceof Symbol;
   }
 }
 
-export class Literal implements Formula {
+export class Symbol implements Formula {
   private symbol: string;
 
   constructor(symbol: string) {

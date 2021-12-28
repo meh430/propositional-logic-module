@@ -1,3 +1,4 @@
+import { union } from "../Utils";
 import { Formula, Valuation } from "./Formula";
 
 export class Biconditional implements Formula {
@@ -10,10 +11,7 @@ export class Biconditional implements Formula {
   }
 
   getSymbols(): Set<string> {
-    return new Set<string>([
-      ...this.operand1.getSymbols(),
-      ...this.operand2.getSymbols(),
-    ]);
+    return union(this.operand1.getSymbols(), this.operand2.getSymbols());
   }
 
   evaluate(valuation: Valuation): boolean {

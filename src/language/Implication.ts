@@ -1,3 +1,4 @@
+import { union } from "../Utils";
 import { Formula, Valuation } from "./Formula";
 
 export class Implication implements Formula {
@@ -10,10 +11,7 @@ export class Implication implements Formula {
   }
 
   getSymbols(): Set<string> {
-    return new Set<string>([
-      ...this.antecedent.getSymbols(),
-      ...this.consequent.getSymbols(),
-    ]);
+    return union(this.antecedent.getSymbols(), this.consequent.getSymbols());
   }
 
   evaluate(valuation: Valuation): boolean {

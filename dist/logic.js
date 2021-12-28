@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getTautologicalConsequenceCounter = exports.isSatisfiableFormula = exports.isSatisfiableSet = exports.isContradiction = exports.isTautology = exports.Or = exports.Not = exports.Literal = exports.Implication = exports.Biconditional = exports.And = void 0;
+exports.getTautologicalConsequenceCounter = exports.isSatisfiableFormula = exports.isSatisfiableSet = exports.isContradiction = exports.isTautology = exports.Or = exports.Not = exports.Symbol = exports.Implication = exports.Biconditional = exports.And = void 0;
 const Junction_1 = require("./src/language/Junction");
 Object.defineProperty(exports, "And", { enumerable: true, get: function () { return Junction_1.And; } });
 Object.defineProperty(exports, "Or", { enumerable: true, get: function () { return Junction_1.Or; } });
@@ -10,7 +10,7 @@ const Implication_1 = require("./src/language/Implication");
 Object.defineProperty(exports, "Implication", { enumerable: true, get: function () { return Implication_1.Implication; } });
 const Not_1 = require("./src/language/Not");
 Object.defineProperty(exports, "Not", { enumerable: true, get: function () { return Not_1.Not; } });
-Object.defineProperty(exports, "Literal", { enumerable: true, get: function () { return Not_1.Literal; } });
+Object.defineProperty(exports, "Symbol", { enumerable: true, get: function () { return Not_1.Symbol; } });
 const Contradiction_1 = require("./src/Contradiction");
 Object.defineProperty(exports, "isContradiction", { enumerable: true, get: function () { return Contradiction_1.isContradiction; } });
 const Tautology_1 = require("./src/Tautology");
