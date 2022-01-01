@@ -1,8 +1,34 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Literal = void 0;
-const Not_1 = require("./Not");
-class Literal {
+exports.Symbol = exports.Not = void 0;
+class Not {
+    constructor(operand) {
+        this.operand = operand;
+    }
+    getSymbols() {
+        return this.operand.getSymbols();
+    }
+    evaluate(valuation) {
+        return !this.operand.evaluate(valuation);
+    }
+    getFormula() {
+        return `(¬${this.operand.getFormula()})`;
+    }
+    getDual() {
+        if (this.operand instanceof Symbol) {
+            return this.operand;
+        }
+        throw new Error("Formula not in DNF");
+    }
+    isLogicalLiteral() {
+        return this.operand instanceof Symbol;
+    }
+    getOperand() {
+        return this.operand;
+    }
+}
+exports.Not = Not;
+class Symbol {
     constructor(symbol) {
         this.symbol = symbol;
     }
@@ -15,9 +41,9 @@ class Literal {
     getFormula() {
         return this.symbol;
     }
-    getCNF() {
-        return new Not_1.Not(this);
+    getDual() {
+        return new Not(this);
     }
 }
-exports.Literal = Literal;
+exports.Symbol = Symbol;
 //# sourceMappingURL=Literal.js.map

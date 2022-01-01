@@ -30,6 +30,10 @@ export class Not implements Formula {
   isLogicalLiteral(): boolean {
     return this.operand instanceof Symbol;
   }
+
+  getOperand(): Formula {
+    return this.operand;
+  }
 }
 
 export class Symbol implements Formula {

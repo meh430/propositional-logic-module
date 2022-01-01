@@ -18,6 +18,7 @@ import {
   isLogicalLiteral,
 } from "./src/Convert";
 import { Row, TruthTable } from "./src/TruthTable";
+import { dpp } from "./src/DavisPutnamProcedure";
 export {
   And,
   Biconditional,
@@ -40,3 +41,5 @@ export {
   Row,
   TruthTable,
 };
+
+dpp([], [], "");

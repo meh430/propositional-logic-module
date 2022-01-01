@@ -1,9 +1,19 @@
 import { Formula, Valuation } from "./Formula";
-export declare class Literal implements Formula {
+export declare class Not implements Formula {
+    private operand;
+    constructor(operand: Formula);
+    getSymbols(): Set<string>;
+    evaluate(valuation: Valuation): boolean;
+    getFormula(): string;
+    getDual(): Formula;
+    isLogicalLiteral(): boolean;
+    getOperand(): Formula;
+}
+export declare class Symbol implements Formula {
     private symbol;
     constructor(symbol: string);
     getSymbols(): Set<string>;
     evaluate(valuation: Valuation): boolean;
     getFormula(): string;
-    getCNF(): Formula;
+    getDual(): Formula;
 }
