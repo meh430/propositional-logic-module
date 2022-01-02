@@ -1,14 +1,26 @@
 import { Formula, Not, Symbol, Or, And } from "../logic";
 import { convertToCNF, isLogicalLiteral } from "./Convert";
-import { difference, union } from "./Utils";
+import { difference, equalSets, union } from "./Utils";
 
-function disjunctiveClauseToLiteralSet(clause: Or): Set<Formula> {
-  return new Set(clause.getOperands().filter((c) => isLogicalLiteral(c)));
+const NOT_SYMBOL = "¬";
+// list of a set of strings?
+
+function getComplement(s: string): string {
+  return NOT_SYMBOL + s;
 }
 
-function processInput(formulas: Formula[]): Set<Set<Formula>> {
+function disjunctiveClauseToLiteralSet(clause: Or): Set<string> {
+  return new Set(
+    clause
+      .getOperands()
+      .filter((c) => isLogicalLiteral(c))
+      .map((c) => c.getFormula())
+  );
+}
+
+function processInput(formulas: Formula[]): Array<Set<string>> {
   const cnfFormulas = formulas.map((f) => convertToCNF(f));
-  const disjunctiveClauseSets = new Set<Set<Formula>>();
+  const disjunctiveClauseSets = new Array<Set<string>>();
 
   // formula in cnf can be a
   // * literal
@@ -17,15 +29,15 @@ function processInput(formulas: Formula[]): Set<Set<Formula>> {
   // * And (conjunction of disjunctive clauses)
   cnfFormulas.forEach((f) => {
     if (isLogicalLiteral(f)) {
-      disjunctiveClauseSets.add(new Set([f]));
+      disjunctiveClauseSets.push(new Set([f.getFormula()]));
     } else if (f instanceof Or) {
-      disjunctiveClauseSets.add(disjunctiveClauseToLiteralSet(f));
+      disjunctiveClauseSets.push(disjunctiveClauseToLiteralSet(f));
     } else if (f instanceof And) {
       f.getOperands().forEach((o) => {
         if (isLogicalLiteral(o)) {
-          disjunctiveClauseSets.add(new Set([o]));
+          disjunctiveClauseSets.push(new Set([o.getFormula()]));
         } else if (o instanceof Or) {
-          disjunctiveClauseSets.add(disjunctiveClauseToLiteralSet(o));
+          disjunctiveClauseSets.push(disjunctiveClauseToLiteralSet(o));
         }
       });
     }
@@ -34,34 +46,34 @@ function processInput(formulas: Formula[]): Set<Set<Formula>> {
   return disjunctiveClauseSets;
 }
 
-function isTautology(clause: Set<Formula>, order: Symbol[]): boolean {
+function isTautology(clause: Set<string>, order: string[]): boolean {
   return order.some((s) => {
-    const complement = new Not(s);
-    return clause.has(s) && clause.has(complement);
+    return clause.has(s) && clause.has(getComplement(s));
   });
 }
 
 function removeTautologies(
-  s: Set<Set<Formula>>,
-  order: Symbol[]
-): Set<Set<Formula>> {
-  return new Set([...s].filter((c) => isTautology(c, order)));
+  disjunctiveClauseSets: Array<Set<string>>,
+  order: string[]
+): Array<Set<string>> {
+  return disjunctiveClauseSets.filter((s) => isTautology(s, order));
 }
 
-function clausesWithLiteral(
-  s: Set<Set<Formula>>,
-  symbol: Symbol
-): Set<Set<Formula>> {
-  const complement = new Not(symbol);
-  return new Set([...s].filter((c) => c.has(symbol) || c.has(complement)));
+function clausesWithSymbol(
+  disjunctiveClauseSets: Array<Set<string>>,
+  symbol: string
+): Array<Set<string>> {
+  return disjunctiveClauseSets.filter(
+    (s) => s.has(symbol) || s.has(getComplement(symbol))
+  );
 }
 
 function resolve(
-  clause1: Set<Formula>,
-  clause2: Set<Formula>,
-  symbol: Symbol
-): Set<Formula> {
-  const complement = new Not(symbol);
+  clause1: Set<string>,
+  clause2: Set<string>,
+  symbol: string
+): Set<string> {
+  const complement = getComplement(symbol);
   if (
     (clause1.has(symbol) && clause2.has(complement)) ||
     (clause1.has(complement) && clause2.has(symbol))
@@ -72,20 +84,25 @@ function resolve(
   return new Set();
 }
 
-function getResolvents(clauses: Set<Set<Formula>>, symbol: Symbol) {
-  const resolvents: Set<Set<Formula>> = new Set();
-  const complement = new Not(symbol);
-  const clauseList = [...clauses];
-  for (let i = 0; i < clauseList.length; i++) {
-    const clause1 = clauseList[i];
-    const hasSymbol = clause1.has(symbol);
-    for (let j = i; j < clauseList.length; j++) {
-      const clause2 = clauseList[j];
+function hasClause(clauses: Array<Set<string>>, clause: Set<string>): boolean {
+  return clauses.some((c) => equalSets(c, clause));
+}
+
+function getResolvents(clauses: Array<Set<string>>, symbol: string) {
+  const resolvents: Array<Set<string>> = [];
+  const complement = getComplement(symbol);
+  for (let i = 0; i < clauses.length; i++) {
+    const clause1 = clauses[i];
+    for (let j = i; j < clauses.length; j++) {
+      const clause2 = clauses[j];
       const canResolve =
         (clause1.has(symbol) && clause2.has(complement)) ||
         (clause1.has(complement) && clause2.has(symbol));
       if (canResolve) {
         const resolvent = resolve(clause1, clause2, symbol);
+        if (!hasClause(resolvents, resolvent)) {
+          resolvents.push(resolvent);
+        }
       }
     }
   }

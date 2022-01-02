@@ -55,3 +55,17 @@ export function intersection<Type>(a: Set<Type>, b: Set<Type>): Set<Type> {
 export function difference<Type>(a: Set<Type>, b: Set<Type>): Set<Type> {
   return new Set([...a].filter((e) => !b.has(e)));
 }
+
+export function equalSets<Type>(a: Set<Type>, b: Set<Type>): boolean {
+  if (a.size !== b.size) {
+    return false;
+  }
+
+  for (const elem of a) {
+    if (!b.has(elem)) {
+      return false;
+    }
+  }
+
+  return true;
+}
