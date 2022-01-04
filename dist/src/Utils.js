@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.equalSets = exports.difference = exports.intersection = exports.union = exports.collectSymbols = exports.generateValuations = void 0;
+exports.flattenConjunction = exports.equalSets = exports.difference = exports.intersection = exports.union = exports.collectSymbols = exports.generateValuations = void 0;
+const logic_1 = require("../logic");
 function generateValuations(symbols) {
     if (symbols.size == 0) {
         return [];
@@ -57,4 +58,25 @@ function equalSets(a, b) {
     return true;
 }
 exports.equalSets = equalSets;
+// given ((A and H) and ((B and (F and G)) and (C and D)))
+// return (A and H and B and F and G and C and D)
+function flattenConjunction(conjunction) {
+    const operands = [];
+    conjunction.getOperands().forEach((c) => {
+        if (c instanceof logic_1.And) {
+            const flattened = flattenConjunction(c);
+            if (flattened instanceof logic_1.And) {
+                operands.push(...flattened.getOperands());
+            }
+            else {
+                operands.push(flattened);
+            }
+        }
+        else {
+            operands.push(c);
+        }
+    });
+    return operands.length <= 1 ? operands[0] : new logic_1.And(...operands);
+}
+exports.flattenConjunction = flattenConjunction;
 //# sourceMappingURL=Utils.js.map

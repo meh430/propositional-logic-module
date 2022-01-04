@@ -1,3 +1,4 @@
+import { And } from "../logic";
 import { Formula, Valuation } from "./language/Formula";
 
 export function generateValuations(symbols: Set<string>): Valuation[] {
@@ -68,4 +69,25 @@ export function equalSets<Type>(a: Set<Type>, b: Set<Type>): boolean {
   }
 
   return true;
+}
+
+// given ((A and H) and ((B and (F and G)) and (C and D)))
+// return (A and H and B and F and G and C and D)
+export function flattenConjunction(conjunction: And): And | Formula {
+  const operands: Formula[] = [];
+
+  conjunction.getOperands().forEach((c) => {
+    if (c instanceof And) {
+      const flattened = flattenConjunction(c);
+      if (flattened instanceof And) {
+        operands.push(...flattened.getOperands());
+      } else {
+        operands.push(flattened);
+      }
+    } else {
+      operands.push(c);
+    }
+  });
+
+  return operands.length <= 1 ? operands[0] : new And(...operands);
 }

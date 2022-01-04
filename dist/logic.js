@@ -27,16 +27,10 @@ Object.defineProperty(exports, "isCNF", { enumerable: true, get: function () { r
 Object.defineProperty(exports, "isLogicalLiteral", { enumerable: true, get: function () { return Convert_1.isLogicalLiteral; } });
 const TruthTable_1 = require("./src/TruthTable");
 Object.defineProperty(exports, "TruthTable", { enumerable: true, get: function () { return TruthTable_1.TruthTable; } });
-const DavisPutnamProcedure_1 = require("./src/DavisPutnamProcedure");
-const p = new Literal_1.Symbol("p");
-const q = new Literal_1.Symbol("q");
-const r = new Literal_1.Symbol("r");
-const s = new Literal_1.Symbol("s");
-console.log((0, DavisPutnamProcedure_1.dpp)([
-    new Junction_1.Or(new Literal_1.Not(p), q),
-    new Junction_1.Or(new Literal_1.Not(q), new Literal_1.Not(r), s),
-    p,
-    r,
-    new Literal_1.Not(s),
-], ["p", "q", "r", "s"]));
+const Utils_1 = require("./src/Utils");
+const s = ["A", "B", "C", "D", "E", "F", "G", "H"].map((e) => new Literal_1.Symbol(e));
+// given ((A and H) and ((B and (F and G)) and (C and D)))
+// return (A and H and B and F and G and C and D)
+const c = new Junction_1.And(new Junction_1.And(s[0], s[7]), new Junction_1.And(new Junction_1.And(s[1], new Junction_1.And(s[5], s[6])), new Junction_1.And(s[2], s[3])));
+console.log((0, Utils_1.flattenConjunction)(c));
 //# sourceMappingURL=logic.js.map
