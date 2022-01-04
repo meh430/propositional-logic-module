@@ -4,3 +4,4 @@ export declare function collectSymbols(formulas: Formula[]): Set<string>;
 export declare function union<Type>(a: Set<Type>, b: Set<Type>): Set<Type>;
 export declare function intersection<Type>(a: Set<Type>, b: Set<Type>): Set<Type>;
 export declare function difference<Type>(a: Set<Type>, b: Set<Type>): Set<Type>;
+export declare function equalSets<Type>(a: Set<Type>, b: Set<Type>): boolean;

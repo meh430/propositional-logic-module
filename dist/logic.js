@@ -28,5 +28,15 @@ Object.defineProperty(exports, "isLogicalLiteral", { enumerable: true, get: func
 const TruthTable_1 = require("./src/TruthTable");
 Object.defineProperty(exports, "TruthTable", { enumerable: true, get: function () { return TruthTable_1.TruthTable; } });
 const DavisPutnamProcedure_1 = require("./src/DavisPutnamProcedure");
-(0, DavisPutnamProcedure_1.dpp)([], [], "");
+const p = new Literal_1.Symbol("p");
+const q = new Literal_1.Symbol("q");
+const r = new Literal_1.Symbol("r");
+const s = new Literal_1.Symbol("s");
+console.log((0, DavisPutnamProcedure_1.dpp)([
+    new Junction_1.Or(new Literal_1.Not(p), q),
+    new Junction_1.Or(new Literal_1.Not(q), new Literal_1.Not(r), s),
+    p,
+    r,
+    new Literal_1.Not(s),
+], ["p", "q", "r", "s"]));
 //# sourceMappingURL=logic.js.map

@@ -1,0 +1,111 @@
+
+> logic@1.0.0 start
+> tsc && node dist/logic.js
+
+\documentclass[11pt]{article}
+\textwidth 15cm 
+\textheight 21.3cm
+\evensidemargin 6mm
+\oddsidemargin 6mm
+\usepackage[bottom=1in, top=0.8in]{geometry}
+\setlength{\parskip}{1.5ex}
+\usepackage{amsfonts,amsmath,amssymb,enumerate,amsthm}
+\allowdisplaybreaks
+\def\logequiv{\mathrel{\vert\mkern-3mu{=}\mkern-3mu{=}\mkern-3mu\vert}}
+\begin{document}
+\parindent=0pt
+\pagestyle{empty}
+\textbf{Eliminate $p$}:\\
+We have that 
+\begin{align*}
+S_{1} = &\{\neg p, q\}, \{\neg q, \neg r, s\}, \{p\}, \{r\}, \{\neg s\}
+\end{align*}
+Removing any tautologies, we get that 
+\begin{align*}
+S'_{1} = &\{\neg p, q\}, \{\neg q, \neg r, s\}, \{p\}, \{r\}, \{\neg s\}
+\end{align*}
+We select clauses with the variable $p$ to get 
+\begin{align*}
+T_{1} = &\{\neg p, q\}, \{p\}
+\end{align*}
+We begin resolving clauses in $T_{1}$ to get
+\begin{itemize}
+\item $\{q\}$ by resolving $\{\neg p, q\}$ and $\{p\}$
+\end{itemize}
+Therefore, we have that 
+\begin{align*}
+U_{1} = &\{q\}
+\end{align*}
+\textbf{Eliminate $q$}:\\
+Now, $S_{2} = (S'_{1} \backslash T_{1}) \cup U_{1}$. 
+We have that 
+\begin{align*}
+S_{2} = &\{\neg q, \neg r, s\}, \{r\}, \{\neg s\}, \{q\}
+\end{align*}
+Removing any tautologies, we get that 
+\begin{align*}
+S'_{2} = &\{\neg q, \neg r, s\}, \{r\}, \{\neg s\}, \{q\}
+\end{align*}
+We select clauses with the variable $q$ to get 
+\begin{align*}
+T_{2} = &\{\neg q, \neg r, s\}, \{q\}
+\end{align*}
+We begin resolving clauses in $T_{2}$ to get
+\begin{itemize}
+\item $\{\neg r, s\}$ by resolving $\{\neg q, \neg r, s\}$ and $\{q\}$
+\end{itemize}
+Therefore, we have that 
+\begin{align*}
+U_{2} = &\{\neg r, s\}
+\end{align*}
+\textbf{Eliminate $r$}:\\
+Now, $S_{3} = (S'_{2} \backslash T_{2}) \cup U_{2}$. 
+We have that 
+\begin{align*}
+S_{3} = &\{r\}, \{\neg s\}, \{\neg r, s\}
+\end{align*}
+Removing any tautologies, we get that 
+\begin{align*}
+S'_{3} = &\{r\}, \{\neg s\}, \{\neg r, s\}
+\end{align*}
+We select clauses with the variable $r$ to get 
+\begin{align*}
+T_{3} = &\{r\}, \{\neg r, s\}
+\end{align*}
+We begin resolving clauses in $T_{3}$ to get
+\begin{itemize}
+\item $\{s\}$ by resolving $\{r\}$ and $\{\neg r, s\}$
+\end{itemize}
+Therefore, we have that 
+\begin{align*}
+U_{3} = &\{s\}
+\end{align*}
+\textbf{Eliminate $s$}:\\
+Now, $S_{4} = (S'_{3} \backslash T_{3}) \cup U_{3}$. 
+We have that 
+\begin{align*}
+S_{4} = &\{\neg s\}, \{s\}
+\end{align*}
+Removing any tautologies, we get that 
+\begin{align*}
+S'_{4} = &\{\neg s\}, \{s\}
+\end{align*}
+We select clauses with the variable $s$ to get 
+\begin{align*}
+T_{4} = &\{\neg s\}, \{s\}
+\end{align*}
+We begin resolving clauses in $T_{4}$ to get
+\begin{itemize}
+\item $\{{}\}$ by resolving $\{\neg s\}$ and $\{s\}$
+\end{itemize}
+Therefore, we have that 
+\begin{align*}
+U_{4} = &\{{}\}
+\end{align*}
+Finally, $S_{5} = (S'_{4} \backslash T_{4}) \cup U_{4}$. So 
+\begin{align*}
+S_{5} = &\{{}\}
+\end{align*}
+
+\end{document}
+

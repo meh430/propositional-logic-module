@@ -8,7 +8,7 @@ const NOT_SYMBOL = "¬";
 type Clauses = Array<Set<string>>;
 
 function getComplement(s: string): string {
-  return NOT_SYMBOL + s;
+  return `(${NOT_SYMBOL}${s})`;
 }
 
 function disjunctiveClauseToLiteralSet(clause: Or): Set<string> {
@@ -58,7 +58,7 @@ function removeTautologies(
   disjunctiveClauseSets: Clauses,
   order: string[]
 ): Clauses {
-  return disjunctiveClauseSets.filter((s) => isTautology(s, order));
+  return disjunctiveClauseSets.filter((s) => !isTautology(s, order));
 }
 
 function clausesWithSymbol(
@@ -125,10 +125,15 @@ function getResolvents(clauses: Clauses, symbol: string): [Clauses, string[]] {
 }
 
 function isComplement(symbol: string): boolean {
-  return symbol.startsWith(NOT_SYMBOL);
+  return (
+    symbol.length > 2 &&
+    symbol.startsWith("(") &&
+    symbol.endsWith(")") &&
+    symbol[1] === NOT_SYMBOL
+  );
 }
 
-// requires input to be of form ¬(X)
+// requires input to be of form (¬X)
 function getSymbol(negation: string): string {
   return negation.substring(2, negation.length - 1);
 }
@@ -204,12 +209,12 @@ ${u}sepackage{amsfonts,amsmath,amssymb,enumerate,amsthm}
 }
 
 export function dpp(formulas: Formula[], order: string[]): string {
-  const statements = ["The premises are:\n"];
+  const statements = []; //["The premises are:\n"];
 
   const addClauseSet = (title: string, clauses: Clauses) => {
     statements.push("\\begin{align*}\n");
     statements.push(
-      title + " = &" + getSetLatex(clauses, clauses.length, false) + "n"
+      title + " = &" + getSetLatex(clauses, clauses.length, false) + "\n"
     );
     statements.push("\\end{align*}\n");
   };
@@ -220,9 +225,7 @@ export function dpp(formulas: Formula[], order: string[]): string {
     const setSTitle = setSymbol("S", index + 1);
     const setSPrimeTitle = setSymbol("S'", index + 1);
     const setTTitle = setSymbol("T", index + 1);
-    const setTPrev = setSymbol("T", index);
     const setUTitle = setSymbol("U", index + 1);
-    const setUPrev = setSymbol("U", index);
 
     statements.push(`\\textbf{Eliminate $${variable}$}:\\\\\n`);
 
@@ -230,7 +233,7 @@ export function dpp(formulas: Formula[], order: string[]): string {
       statements.push(
         `Now, $S_{${
           index + 1
-        }} = (S'_{${index}} \\backslash T_{${index}}) \cup U_{${index}}$. \n`
+        }} = (S'_{${index}} \\backslash T_{${index}}) \\cup U_{${index}}$. \n`
       );
     }
 
@@ -271,7 +274,7 @@ export function dpp(formulas: Formula[], order: string[]): string {
   statements.push(
     `Finally, $S_{${
       i + 1
-    }} = (S'_{${i}} \\backslash T_{${i}}) \cup U_{${i}}$. So \n`
+    }} = (S'_{${i}} \\backslash T_{${i}}) \\cup U_{${i}}$. So \n`
   );
   addClauseSet(setSymbol("S", i + 1), setS);
 
