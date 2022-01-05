@@ -42,6 +42,8 @@ export {
   Row,
   TruthTable,
 };
+
+/*
 const s = ["A", "B", "C", "D", "E", "F", "G", "H"].map((e) => new Symbol(e));
 // given ((A and H) and ((B and (F and G)) and (C and D)))
 // return (A and H and B and F and G and C and D)
@@ -51,3 +53,4 @@ const c = new And(
 );
 
 console.log(flattenConjunction(c));
+*/

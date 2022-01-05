@@ -2,7 +2,13 @@ import * as assert from "assert";
 import { And, Or } from "../src/language/Junction";
 import { Implication } from "../src/language/Implication";
 import { Not, Symbol } from "../src/language/Literal";
-import { collectSymbols, generateValuations } from "../src/Utils";
+import {
+  collectSymbols,
+  difference,
+  generateValuations,
+  intersection,
+  union,
+} from "../src/Utils";
 import { TestSuite } from "./test";
 
 function s(...syms: string[]) {
@@ -40,6 +46,26 @@ const tests: TestSuite = {
       { p: true, q: true },
     ];
     assert.deepEqual(generateValuations(s("p", "q")), expected2);
+  },
+  "Set operation tests": () => {
+    const a = s("a", "b", "c", "d");
+    const b = s("c", "a", "e");
+    const c = s("1");
+    const d = s();
+
+    assert.deepEqual(union(a, b), s("a", "b", "c", "d", "e"));
+    assert.deepEqual(union(c, c), c);
+    assert.deepEqual(union(d, d), d);
+
+    assert.deepEqual(intersection(a, b), s("a", "c"));
+    assert.deepEqual(intersection(c, c), c);
+    assert.deepEqual(intersection(a, c), d);
+    assert.deepEqual(intersection(d, d), d);
+
+    assert.deepEqual(difference(a, b), s("b", "d"));
+    assert.deepEqual(difference(c, c), d);
+    assert.deepEqual(difference(b, c), b);
+    assert.deepEqual(difference(d, d), d);
   },
 };
 
