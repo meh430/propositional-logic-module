@@ -1,4 +1,4 @@
-import { And } from "../logic";
+import { And, Or } from "../logic";
 import { Formula, Valuation } from "./language/Formula";
 
 export function generateValuations(symbols: Set<string>): Valuation[] {
@@ -90,4 +90,23 @@ export function flattenConjunction(conjunction: And): And | Formula {
   });
 
   return operands.length <= 1 ? operands[0] : new And(...operands);
+}
+
+export function flattenDisjunction(disjunction: Or): Or | Formula {
+  const operands: Formula[] = [];
+
+  disjunction.getOperands().forEach((d) => {
+    if (d instanceof Or) {
+      const flattened = flattenDisjunction(d);
+      if (flattened instanceof Or) {
+        operands.push(...flattened.getOperands());
+      } else {
+        operands.push(flattened);
+      }
+    } else {
+      operands.push(d);
+    }
+  });
+
+  return operands.length <= 1 ? operands[0] : new Or(...operands);
 }
