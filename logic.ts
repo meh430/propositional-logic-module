@@ -19,8 +19,7 @@ import {
 } from "./src/Convert";
 import { Row, TruthTable } from "./src/TruthTable";
 import { dpp } from "./src/DavisPutnamProcedure";
-import { flattenConjunction } from "./src/Utils";
-import { createFormula, tokenize } from "./src/Parser";
+import { createFormula } from "./src/Parser";
 export {
   And,
   Biconditional,
@@ -43,17 +42,3 @@ export {
   Row,
   TruthTable,
 };
-
-/*
-const s = ["A", "B", "C", "D", "E", "F", "G", "H"].map((e) => new Symbol(e));
-// given ((A and H) and ((B and (F and G)) and (C and D)))
-// return (A and H and B and F and G and C and D)
-const c = new And(
-  new And(s[0], s[7]),
-  new And(new And(s[1], new And(s[5], s[6])), new And(s[2], s[3]))
-);
-
-console.log(flattenConjunction(c));
-*/
-
-// console.log(createFormula("A and B and C implies D"));

@@ -66,7 +66,7 @@ function parseExpression(expression: string | string[]): Formula {
   }
 }
 
-export function tokenize(expression: string): string[] {
+function tokenize(expression: string): string[] {
   const tokens: string[] = [];
 
   for (let i = 0; i < expression.length; i++) {
