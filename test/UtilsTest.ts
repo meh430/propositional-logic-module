@@ -5,6 +5,7 @@ import { Not, Symbol } from "../src/language/Literal";
 import {
   collectSymbols,
   difference,
+  equalSets,
   generateValuations,
   intersection,
   union,
@@ -14,6 +15,11 @@ import { TestSuite } from "./test";
 function s(...syms: string[]) {
   return new Set<string>([...syms]);
 }
+
+const a = s("a", "b", "c", "d");
+const b = s("c", "a", "e");
+const c = s("1");
+const d = s();
 
 const tests: TestSuite = {
   "collectSymbols test": () => {
@@ -48,11 +54,6 @@ const tests: TestSuite = {
     assert.deepEqual(generateValuations(s("p", "q")), expected2);
   },
   "Set operation tests": () => {
-    const a = s("a", "b", "c", "d");
-    const b = s("c", "a", "e");
-    const c = s("1");
-    const d = s();
-
     assert.deepEqual(union(a, b), s("a", "b", "c", "d", "e"));
     assert.deepEqual(union(c, c), c);
     assert.deepEqual(union(d, d), d);
@@ -66,6 +67,13 @@ const tests: TestSuite = {
     assert.deepEqual(difference(c, c), d);
     assert.deepEqual(difference(b, c), b);
     assert.deepEqual(difference(d, d), d);
+  },
+  "Set equality test": () => {
+    assert.equal(equalSets(a, s("c", "b", "a", "d")), true);
+    assert.equal(equalSets(c, s("1")), true);
+    assert.equal(equalSets(d, s()), true);
+    assert.equal(equalSets(b, s("a", "c", "d")), false);
+    assert.equal(equalSets(a, b), false);
   },
 };
 
