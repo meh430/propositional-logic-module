@@ -20,6 +20,7 @@ import {
 import { Row, TruthTable } from "./src/TruthTable";
 import { dpp } from "./src/DavisPutnamProcedure";
 import { flattenConjunction } from "./src/Utils";
+import { createFormula, tokenize } from "./src/Parser";
 export {
   And,
   Biconditional,
@@ -54,3 +55,5 @@ const c = new And(
 
 console.log(flattenConjunction(c));
 */
+
+// console.log(createFormula("A and B and C implies D"));

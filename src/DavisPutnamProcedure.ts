@@ -1,4 +1,5 @@
-import { Formula, Or, And } from "../logic";
+import { Formula } from "./language/Formula";
+import { And, Or } from "./language/Junction";
 import { convertToCNF, isLogicalLiteral } from "./Convert";
 import { difference, equalSets, union } from "./Utils";
 

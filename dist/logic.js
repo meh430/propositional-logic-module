@@ -27,10 +27,17 @@ Object.defineProperty(exports, "isCNF", { enumerable: true, get: function () { r
 Object.defineProperty(exports, "isLogicalLiteral", { enumerable: true, get: function () { return Convert_1.isLogicalLiteral; } });
 const TruthTable_1 = require("./src/TruthTable");
 Object.defineProperty(exports, "TruthTable", { enumerable: true, get: function () { return TruthTable_1.TruthTable; } });
-const Utils_1 = require("./src/Utils");
-const s = ["A", "B", "C", "D", "E", "F", "G", "H"].map((e) => new Literal_1.Symbol(e));
+const Parser_1 = require("./src/Parser");
+/*
+const s = ["A", "B", "C", "D", "E", "F", "G", "H"].map((e) => new Symbol(e));
 // given ((A and H) and ((B and (F and G)) and (C and D)))
 // return (A and H and B and F and G and C and D)
-const c = new Junction_1.And(new Junction_1.And(s[0], s[7]), new Junction_1.And(new Junction_1.And(s[1], new Junction_1.And(s[5], s[6])), new Junction_1.And(s[2], s[3])));
-console.log((0, Utils_1.flattenConjunction)(c));
+const c = new And(
+  new And(s[0], s[7]),
+  new And(new And(s[1], new And(s[5], s[6])), new And(s[2], s[3]))
+);
+
+console.log(flattenConjunction(c));
+*/
+console.log((0, Parser_1.createFormula)("A and B and C implies D"));
 //# sourceMappingURL=logic.js.map

@@ -1,4 +1,4 @@
-import { And } from "../logic";
+import { And, Or } from "../logic";
 import { Formula, Valuation } from "./language/Formula";
 export declare function generateValuations(symbols: Set<string>): Valuation[];
 export declare function collectSymbols(formulas: Formula[]): Set<string>;
@@ -7,3 +7,4 @@ export declare function intersection<Type>(a: Set<Type>, b: Set<Type>): Set<Type
 export declare function difference<Type>(a: Set<Type>, b: Set<Type>): Set<Type>;
 export declare function equalSets<Type>(a: Set<Type>, b: Set<Type>): boolean;
 export declare function flattenConjunction(conjunction: And): And | Formula;
+export declare function flattenDisjunction(disjunction: Or): Or | Formula;
