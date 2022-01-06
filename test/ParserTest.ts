@@ -5,7 +5,7 @@ import { Not, Symbol } from "../src/language/Literal";
 import { Implication } from "../src/language/Implication";
 import { Biconditional } from "../src/language/Biconditional";
 import { TestSuite } from "./test";
-import { createFormula, tokenize } from "../src/Parser";
+import { createFormula } from "../src/Parser";
 
 const MSG = "Invalid input";
 
@@ -76,8 +76,23 @@ const tests: TestSuite = {
     assertInput("(A or B) or (C or (D or E))", new Or(A, B, C, D, E));
     assertInput("(B or ((C) or (D or E))) or A", new Or(B, C, D, E, A));
   },
-  "Not test": () => {},
-  "Mixed tests": () => {},
+  "Not test": () => {
+    assertInput("not A", new Not(A));
+    assertInput("(not (not (not (A))))", new Not(new Not(new Not(A))));
+  },
+  "Mixed tests": () => {
+    assertInput(
+      "(A and B) implies not (C and (not (A)))",
+      new Implication(new And(A, B), new Not(new And(C, new Not(A))))
+    );
+    assertInput(
+      "A and B and not C implies A and B or not C",
+      new Implication(
+        new And(A, B, new Not(C)),
+        new Or(new And(A, B), new Not(C))
+      )
+    );
+  },
 };
 
 module.exports = tests;
