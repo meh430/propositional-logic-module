@@ -8,6 +8,7 @@ import { flattenConjunction, flattenDisjunction } from "./Utils";
 const OPENING = "(";
 const CLOSING = ")";
 const SPACE = " ";
+const MSG = "Invalid input";
 
 const precedence: { [key: string]: number } = {
   not: 0,
@@ -27,6 +28,9 @@ export function createFormula(expression: string): Formula {
 
 function parseExpression(expression: string | string[]): Formula {
   const isString = typeof expression === "string";
+  if (isString && (expression.length === 0 || !balanced(expression))) {
+    throw new Error(MSG);
+  }
   const inner = isString ? removeParenthesis(expression) : "";
   const tokens = isString ? tokenize(inner) : expression;
   let lowestPrecedenceIndex = -1;
@@ -44,10 +48,20 @@ function parseExpression(expression: string | string[]): Formula {
 
   // not is unary, should only have expression to the right
   if (op === "not") {
+    if (tokens.length > 2) {
+      throw new Error(MSG);
+    }
+
     return new Not(parseExpression(tokens[1]));
   }
 
   if (op === "symbol") {
+    if (tokens.length > 1) {
+      throw new Error(MSG);
+    } else if (hasParenthesis(tokens[0])) {
+      return parseExpression(tokens[0]);
+    }
+
     return new Symbol(tokens[0]);
   }
 
@@ -66,17 +80,18 @@ function parseExpression(expression: string | string[]): Formula {
   }
 }
 
-function tokenize(expression: string): string[] {
+export function tokenize(expression: string): string[] {
   const tokens: string[] = [];
 
   for (let i = 0; i < expression.length; i++) {
     const c = expression[i];
+    // cannot get index of first here, because first might be for inner parenthesis?
     if (c === OPENING) {
-      const closingIndex = getIndexOfFirst(expression, i, CLOSING);
+      const closingIndex = getIndexOfClosingP(expression, i);
       const parenthesizedExpression = expression.substring(i, closingIndex + 1);
       tokens.push(parenthesizedExpression);
       i = closingIndex + 1;
-    } else if (c === " ") {
+    } else if (c === SPACE) {
       continue;
     } else {
       const delimitIndex = getIndexOfFirst(expression, i, SPACE);
@@ -101,12 +116,41 @@ function getIndexOfFirst(s: string, start: number, target: string): number {
   return target === SPACE ? s.length : -1;
 }
 
-function removeParenthesis(expression: string) {
-  if (expression.startsWith("(") && expression.endsWith(")")) {
+// assumes balanced s
+function getIndexOfClosingP(s: string, start: number): number {
+  const stack: number[] = [];
+  for (let i = start; i < s.length; i++) {
+    const c = s[i];
+    if (c === OPENING) {
+      stack.push(0);
+    } else if (c === CLOSING) {
+      stack.pop();
+    }
+
+    if (stack.length === 0) {
+      return i;
+    }
+  }
+
+  return -1;
+}
+
+function removeParenthesis(expression: string): string {
+  if (hasParenthesis(expression)) {
     return expression.substring(1, expression.length - 1);
   }
 
   return expression;
+}
+
+// (A) is true
+// (A) and (B) is false
+function hasParenthesis(s: string): boolean {
+  if (!s.startsWith(OPENING) || !s.endsWith(CLOSING)) {
+    return false;
+  }
+
+  return balanced(s.substring(1, s.length - 1));
 }
 
 function getElementIfSingle<Type>(arr: Array<Type>): Type | Type[] {
@@ -115,4 +159,17 @@ function getElementIfSingle<Type>(arr: Array<Type>): Type | Type[] {
   }
 
   return arr;
+}
+
+function balanced(s: string): boolean {
+  const stack: number[] = [];
+  for (let i = 0; i < s.length; i++) {
+    let c = s[i];
+    if (c === OPENING) {
+      stack.push(0);
+    } else if (c === CLOSING) {
+      stack.pop();
+    }
+  }
+  return stack.length === 0;
 }

@@ -28,16 +28,5 @@ Object.defineProperty(exports, "isLogicalLiteral", { enumerable: true, get: func
 const TruthTable_1 = require("./src/TruthTable");
 Object.defineProperty(exports, "TruthTable", { enumerable: true, get: function () { return TruthTable_1.TruthTable; } });
 const Parser_1 = require("./src/Parser");
-/*
-const s = ["A", "B", "C", "D", "E", "F", "G", "H"].map((e) => new Symbol(e));
-// given ((A and H) and ((B and (F and G)) and (C and D)))
-// return (A and H and B and F and G and C and D)
-const c = new And(
-  new And(s[0], s[7]),
-  new And(new And(s[1], new And(s[5], s[6])), new And(s[2], s[3]))
-);
-
-console.log(flattenConjunction(c));
-*/
-console.log((0, Parser_1.createFormula)("A and B and C implies D"));
+console.log((0, Parser_1.createFormula)("(A implies B) implies (A implies B)"));
 //# sourceMappingURL=logic.js.map
