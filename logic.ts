@@ -17,7 +17,6 @@ import {
   isCNF,
   isLogicalLiteral,
 } from "./src/Convert";
-import { Row, TruthTable } from "./src/TruthTable";
 import { dpp } from "./src/DavisPutnamProcedure";
 import { createFormula } from "./src/Parser";
 export {
@@ -39,6 +38,6 @@ export {
   isDNF,
   isCNF,
   isLogicalLiteral,
-  Row,
-  TruthTable,
+  dpp,
+  createFormula,
 };

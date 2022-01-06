@@ -5,7 +5,7 @@ import { Implication } from "../src/language/Implication";
 import { Not, Symbol } from "../src/language/Literal";
 import { convertToDNF, convertToCNF } from "../src/Convert";
 import { TestSuite } from "./test";
-import { Biconditional } from "../logic";
+import { Biconditional } from "../src/language/Biconditional";
 
 const p = new Symbol("p");
 const q = new Symbol("q");
