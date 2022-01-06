@@ -1,3 +1,4 @@
+import { isLogicalLiteral } from "../Convert";
 import { Formula, Valuation } from "./Formula";
 import { Symbol, Not } from "./Literal";
 
@@ -63,7 +64,7 @@ export class And extends Junction {
   }
 
   getDual(): Formula {
-    if (this.juncts.every((j) => j instanceof Symbol || j instanceof Not)) {
+    if (this.juncts.every((j) => isLogicalLiteral(j))) {
       return new Or(...this.juncts.map((j) => j.getDual()));
     }
 
@@ -88,7 +89,9 @@ export class Or extends Junction {
 
   getDual(): Formula {
     const inDNF = this.juncts.every(
-      (j) => j instanceof Symbol || j instanceof Not || j instanceof And
+      (j) =>
+        isLogicalLiteral(j) ||
+        (j instanceof And && j.getOperands().every((o) => isLogicalLiteral(o)))
     );
 
     if (inDNF) {
