@@ -21,6 +21,7 @@ const A = new Symbol("A");
 const B = new Symbol("B");
 const C = new Symbol("C");
 const D = new Symbol("D");
+const E = new Symbol("E");
 
 const tests: TestSuite = {
   "Empty string test": () => {
@@ -48,10 +49,34 @@ const tests: TestSuite = {
       "(A implies B) implies (A implies B)",
       new Implication(impl, impl)
     );
+    assertInput(
+      "(((A) implies (B implies C))) implies D",
+      new Implication(new Implication(A, new Implication(B, C)), D)
+    );
   },
-  "Biconditional test": () => {},
-  "And test": () => {},
-  "Or test": () => {},
+  "Biconditional test": () => {
+    const equiv = new Biconditional(A, B);
+    assertInput("(A iff B)", equiv);
+    assertInput("   A    iff     B   ", equiv);
+    assertInput("(A iff B) iff (A iff B)", new Biconditional(equiv, equiv));
+    assertInput(
+      "(((A) iff (B iff C))) iff D",
+      new Biconditional(new Biconditional(A, new Biconditional(B, C)), D)
+    );
+  },
+  "And test": () => {
+    assertInput("A and B", new And(A, B));
+    assertInput("A and B and C and D", new And(A, B, C, D));
+    assertInput("(A and B) and (C and (D and E))", new And(A, B, C, D, E));
+    assertInput("(B and ((C) and (D and E))) and A", new And(B, C, D, E, A));
+  },
+  "Or test": () => {
+    assertInput("A or B", new Or(A, B));
+    assertInput("A or B or C or D", new Or(A, B, C, D));
+    assertInput("(A or B) or (C or (D or E))", new Or(A, B, C, D, E));
+    assertInput("(B or ((C) or (D or E))) or A", new Or(B, C, D, E, A));
+  },
+  "Not test": () => {},
   "Mixed tests": () => {},
 };
 
